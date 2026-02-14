@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Will you be my Valentine?</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(lightpink, aliceblue);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container{
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1{
+            font-size: 2.5rem;
+            font-style: oblique;
+            color: #ff1493;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,1)
+        }
+
+        .heart{
+            width: 100px;
+            height: 100px;
+            background: #f20044;
+            position: relative;
+            margin: 50px auto;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.2s infinite
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background: #f20044;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -50px;
+            left: 0;
+            }
+
+        .heart::after {
+        left: 50px;
+        top: 0;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: rotate(-45deg) scale(1);
+                }
+            25% {
+                transform: rotate(-45deg) scale(1.1);
+            }
+            50% {
+                transform: rotate(-45deg) scale(1);
+            }
+        }
+
+        .buttons {
+            margin-top: 50px;
+            position: relative;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        button {
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            margin: 0 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);                                                                                                                    
+        }
+
+        .yes-btn {
+            background: #ff69b4;
+            color: white;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            background: #ff1493;
+        }
+
+        .no-btn {
+            background: #fff;
+            color: #ff1493;
+        }
+
+        .no-btn:hover {
+            background: #ffe6f0;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+            font-size: 1.8rem;
+            }
+                                                                
+            button {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <audio id="bgMusic" loop style="display: none;">   
+          <source src="will you be my valentine .mp3" type="mpeg">
+    </audio>
+
+
+    <div class="container">
+        <h1>Will You Be My Valentine? 💕</h1>
+         <div class="heart"></div>
+                                        
+         <div class="buttons">
+              <button class="yes-btn" onclick="sayYes()">Yes! 💖</button>
+              <button class="no-btn" id="noBtn">No</button>
+          </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+                
+        noBtn.addEventListener('mouseover', function() {
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+                                                            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+                                                                                                
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+        noBtn.addEventListener('click', function() {
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+                                                
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+                                                                                    
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        })
+
+        function sayYes() {
+            alert('Yay! 💕 I knew you would say yes! 💖🫠😌🤭');
+            window.location.href = 'card.html';
+                    
+        }
+
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.volume = 0.3; // 30% volume
+                                    
+            // Play on first click (browsers block autoplay)
+            document.addEventListener('click', function() {
+                bgMusic.play().catch(e => console.log('Audio failed'));
+            }, { once: true });
+                                                                        
+                                                                        
+    </script>
+
+</body>
+
+</html>
