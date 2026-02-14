@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Card</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffcccb 0%, #ff9999 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+
+        .card-container {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            z-index: 1;
+        }
+
+        .card-container.opened {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-inside {
+             position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            }
+        
+        .card-front {
+            background: linear-gradient(135deg, #fff9c4 0%, #ffe082 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .envelope {
+            width: 200px;
+            height: 150px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 0;
+            height: 0;
+             border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 75px solid #ffb3d9;
+            top: 0;
+            left: 0;
+            animation: flap 2s ease-in-out infinite;                                                                                                                        
+        }
+
+        @keyframes flap {
+            0%, 100% { transform: rotateX(0deg); }
+            50% { transform: rotateX(-20deg); }
+        }
+        
+        .envelope-body {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background: #ffc0cb;
+            bottom: 0;
+            border-radius: 0 0 10px 10px;                                                                          
+        }
+
+        .card-front h1 {
+            color: white;
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .card-front p {
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .card-inside {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .letter-content {
+            text-align: center;
+        }
+
+        .letter-content h2 {
+            color: #ff1493;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .letter-content p {
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #ff1493;
+            margin-top: 30px;
+            font-size: 1.3rem;
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .heart-float {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+            transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .card-container {
+                width: 90%;
+                height: 600px;
+            }
+            .card-front h1 {
+                font-size: 1.8rem;
+            }
+            .letter-content h2 {
+                font-size: 1.5rem;
+            }
+            .letter-content p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" style="display: none;">
+        <source src="Calum-Scott-You-Are-The-Reason-(AmkLoaded).mp3" type="mpeg">
+    </audio>
+    
+    <div class="hearts">
+        <span class="heart-float" style="left: 10%; top: 20%;">💓💝</span>
+        <span class="heart-float" style="left: 80%; top: 30%; animation-delay: 1s;">💕</span>
+        <span class="heart-float" style="left: 15%; top: 70%; animation-delay: 2s;">❤️‍🔥💖</span>
+        <span class="heart-float" style="left: 85%; top: 60%; animation-delay: 1.5s;">❤️💗</span>
+    </div>
+
+    <div class="card-container" id="card"  onclick="openCard()">
+        <div class="card-front">
+            <div class="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body"></div>
+            </div>
+            <h1>Happy Valentine<br> Best Love💕</h1>
+            <p>Click to open</p>
+        </div>
+
+        <div class="card-inside">
+            <div class="letter-content">
+                <h2>To my Amazing Sister💖</h2>
+                                                        
+                <p>
+                    They say you can't choose your family, but if I could 
+                    choose a sister from everyone in the world, I would 
+                    still choose you. You're not just my sister – you're 
+                    my best friend, my partner in crime, and my forever person.
+                </p>
+                                                                                                                                                                                        
+                <p>
+                    Thank you for all the laughs we've shared, the secrets 
+                    we've kept, and the memories we've made together. Thank 
+                    you for always being there when I need someone to talk to, 
+                    and for understanding me like no one else can.
+                </p>
+                                                                                                                                                                                                                                                                                                    
+                <p>
+                    You make life brighter just by being in it. Your kindness, 
+                    your strength, and your beautiful spirit inspire me every 
+                    day. I'm so grateful to have you as my sister, and I hope 
+                    you know how much you mean to me.
+                </p>
+
+                <p>
+                    Happy Valentine's Day, sis! Here's to all our inside jokes, 
+                    and the amazing bond we share. I love you 
+                    more than words can say!
+                </p>
+                                                                                                                
+                <div class="signature">
+                    Love always 💕
+                    <br>Better half 💞
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function openCard() {
+            const card = document.getElementById('card');
+            card.classList.toggle('opened');
+        }
+
+        const music = document.getElementById('bgMusic');
+            music.volume = 0.3;
+                
+            document.addEventListener('click', function() {
+                music.play().catch(e => console.log('Audio failed'));
+            }, { once: true });
+    </script>
+                                                                                                                
+</body>
+</html>
